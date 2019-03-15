@@ -13,6 +13,13 @@ module Yograph
       @vertex[vertex.value] = vertex
     end
 
+    def create_vertex_in_batch(vertex_list)
+      vertex_list.each do |vertex|
+        v = Vertex.new(vertex)
+        @vertex[v.value] = v
+      end
+    end
+
     def add_edge(vertex1, vertex2)
       @vertex[vertex1.value].connect(@vertex[vertex2.value])
       @vertex[vertex2.value].connect(@vertex[vertex1.value])
