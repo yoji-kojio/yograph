@@ -28,6 +28,14 @@ module Yograph
       @edges
     end
 
+    def create_edges_in_batch(edges_list)
+      edges_list.each do |src, dest|
+        @vertex[src].connect(@vertex[dest])
+        @vertex[dest].connect(@vertex[src])
+        @edges << [src, dest] unless include_edge?(@edges, @vertex[src], @vertex[dest])
+      end
+    end
+
     def adjacent?(vertex1, vertex2)
       vertex1.adjacent_vertex.any? { |v| v == vertex2 }
     end
